@@ -59,6 +59,10 @@ router.post('/csv/:coll', (req, res) => {
       return acc
     }, {})
 
+    if (document._key === '') {
+      errors.push(`Unable to process entry, "_key" is empty: ${entry}`)
+      saveable = false
+    }
     if (edges && !document._to) {
       errors.push(`Unable to process entry, missing "_to": ${entry}`)
       saveable = false
